@@ -1,0 +1,40 @@
+/* ------------------------------------------------------ accordion styles ------------------------------------------------ */
+
+.principal {
+    margin-top: 100px;
+}
+
+.der {
+    background-color: #fff;
+}
+
+.acordeon {
+    background: #eeeeee;
+}
+
+.acordeon a {
+    text-decoration: none;
+    /* remove the underscore */
+    display: block;
+    background: #dddddd;
+    line-height: 2.5;
+    padding: 0 1em;
+    color: steelblue;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.acordeon p {
+    padding: 1em;
+    /* put the padding the unit em refers to the size of the font 1 em means time the size of
+     the letter*/
+    margin: 0;
+    /* remove margins */
+    display: none;
+    /* hide the paragraph */
+}
+
+.acordeon p:target {
+    display: block;
+    /* Display an element (such as <p>). It starts on a new line, and takes up the full width.*/
+}

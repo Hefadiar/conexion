@@ -1,0 +1,298 @@
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-size: 18px;
+}
+
+body {
+    background-color: #CCC;
+}
+
+.main {
+    padding-left: 8%;
+}
+
+.contenedor {
+    margin: 100px 8% 0 8%;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.formulario {
+    background-color: #f3f2f2;
+    border-radius: 10px;
+    box-shadow: 0 10px 18px #888888;
+}
+
+
+/* Title of the form */
+
+h1 {
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #CCC;
+}
+
+form {
+    padding-top: 1rem;
+}
+
+
+/* Placeholder */
+
+::placeholder {
+    color: green;
+}
+
+
+/* Selection of text inside the fields */
+
+::selection {
+    color: white;
+    background-color: green;
+}
+
+
+/* Fields */
+
+input,
+output,
+button {
+    /* To make the text smaller */
+    font-size: .9rem;
+    /* So that the text does not stick so close to the edge of the input */
+    padding: .3rem;
+}
+
+
+/* Buttons */
+
+button {
+    background: #026aa7;
+    box-shadow: inset 0 -4px 0 0 rgba(0, 0, 0, 0.2);
+    padding: .5rem 1rem;
+    color: #DDD;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow: inset 0 -4px 0 0 rgba(0, 0, 0, 0.6), 0 0 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+button:active {
+    box-shadow: inset 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+/* Options */
+
+option {
+    font-size: .9rem;
+    padding: 5px 1rem;
+}
+
+
+/* Numeric inputs should display text aligned to the right */
+
+input[type="number"] {
+    text-align: right;
+}
+
+
+/* Invalid fields are shown with a red border and background */
+
+:invalid:not(form) {
+    background-color: #FFEDED;
+    border: 1px solid red;
+    outline: none;
+}
+
+
+/* When an invalid input receives focus, a red shadow is displayed */
+
+:invalid:focus {
+    box-shadow: 0 0 5px red;
+    outline: none;
+}
+
+
+/* Row of the form */
+
+.fila {
+    margin-bottom: 2rem;
+    /* Flexible box with children forming rows */
+    display: flex;
+    flex-wrap: wrap;
+    /* So that each row is aligned vertically to the center */
+    align-items: center;
+    /* To be able to position the error messages absolutely with respect to the row */
+    position: relative;
+}
+
+
+/* Property labels */
+
+.propiedad {
+    /* To make it centered horizontally within the row make its minimum width 50% and align its text to the right */
+    min-width: 50%;
+    text-align: right;
+    padding-right: 1rem;
+    /* For the label to be placed before the input, we give it an order less than 0 */
+    order: -1;
+}
+
+
+/* The property tag whose field has focus or is on */
+
+:focus~.propiedad,
+:active~.propiedad {
+    font-weight: bold;
+}
+
+
+/* The property whose field is not empty, has focus or is on and is valid */
+
+:valid:focus:not(:placeholder-shown)~.propiedad,
+.fila :valid:active:not(:placeholder-shown)~.propiedad {
+    color: teal;
+}
+
+
+/* The property whose field has focus or is on and is invalid */
+
+.fila :invalid:focus~.propiedad,
+.fila :invalid:active~.propiedad {
+    color: red;
+}
+
+
+/* If there is more than one element in the row, leave
+a margin to the left (less on the property) */
+
+.fila>*:not(.propiedad) {
+    margin-right: 1rem;
+}
+
+
+/* The properties corresponding to multiple selects */
+
+.fila select[multiple]~.propiedad {
+    align-self: flex-start;
+}
+
+
+/* The row of buttons */
+
+.botonera {
+    /* Centered in a row */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Small fields */
+
+.small {
+    width: 3rem;
+}
+
+
+/* Valid field properties with validation that are not empty must show an acceptance icon before */
+
+:required:valid:not(:placeholder-shown)~.propiedad:before,
+input[type="email"]:valid:not(:placeholder-shown)~.propiedad:before,
+input[type="url"]:valid:not(:placeholder-shown)~.propiedad:before,
+input[type="tel"]:valid:not(:placeholder-shown)~.propiedad:before {
+    content: "\2713";
+    color: teal;
+    vertical-align: middle;
+    display: inline;
+    padding-right: .5rem;
+}
+
+
+/* Invalid field properties must display an error icon before */
+
+:invalid~.propiedad:before {
+    content: "\26A0";
+    color: red;
+    vertical-align: middle;
+    display: inline;
+    padding-right: .5rem;
+}
+
+
+/* Invalid field properties should display an invalid value message below the field. */
+
+:invalid~.propiedad:after {
+    content: "Valor incorrecto";
+    color: red;
+    font-size: .8rem;
+    /* Absolutely position with respect to the row to place it below input */
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    text-align: left;
+}
+
+
+/* Error message for required fields */
+
+:required:invalid~.propiedad:after {
+    content: "Campo obligatorio";
+}
+
+
+/* Error message for invalid email */
+
+input[type="email"]:invalid~.propiedad:after {
+    content: "El email debe llevar @ y .";
+}
+
+
+/* Error message for invalid phone */
+
+input[type="tel"]:invalid~.propiedad:after {
+    content: "El teléfono debe ser numérico, contener  10 dígitos y comenzar por 3";
+}
+
+
+/* Error message for invalid URL */
+
+input[type="url"]:invalid~.propiedad:after {
+    content: "La URL debe comenzar por http:// y contener al menos un nombre de dominio";
+}
+
+
+/* Media query */
+
+@media (max-width: 720px) {
+    /* The li align their children at the beginning */
+    .fila {
+        justify-content: flex-start;
+    }
+    /* Labels take up the entire row */
+    .fila .propiedad {
+        flex-basis: 100%;
+        text-align: left;
+        margin-bottom: .3rem;
+    }
+    /* Invalid field properties should display an invalid value message below the field. */
+     :invalid~.propiedad:after {
+        left: 0;
+    }
+}
